@@ -6,13 +6,14 @@ function App() {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   
+ 
   const fetchData = async() => {
     const options = {
       method: "GET",
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
       }};
-    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
+      const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
     
       try {
       const response = await fetch(url, options);
@@ -36,6 +37,44 @@ function App() {
     
   }
 
+  const addTodo = async (todo) => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+      body: JSON.stringify({
+        fields: {
+          title: todo.title,
+        }
+      }),
+    };
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
+    try {
+        
+    const response = await fetch( url, options);
+    
+    if (!response.ok) {
+      throw new Error(`Error has occured: ${response.status}`);
+    }
+    const dataResponse = await response.json();
+    
+    setTodoList((prevTodoList) => [
+      ...prevTodoList,
+      {
+        id: dataResponse.id,
+        title: dataResponse.fields.title,
+      },])
+    //return dataResponse;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+  };
+  
+
+
 
   useEffect(() => {
     fetchData();
@@ -46,9 +85,9 @@ function App() {
     localStorage.setItem('savedTodoList', JSON.stringify(todoList));}
     }, [todoList]);
 
-  const addTodo = (newTodo) => {
-    setTodoList ([...todoList, newTodo]);
-  };
+  // const addTodo = (newTodo) => {
+  //   setTodoList ([...todoList, newTodo]);
+  // };
 
     const removeTodo = (id) => {
       const newList = todoList.filter(
