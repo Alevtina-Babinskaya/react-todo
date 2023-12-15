@@ -1,10 +1,10 @@
-import React from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
+import { useState, useEffect } from 'react';
 
 function App() {
-  const [todoList, setTodoList] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [todoList, setTodoList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   
   const fetchData = async() => {
     const options = {
@@ -37,11 +37,11 @@ function App() {
   }
 
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData();
   },[]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoading === false) {
     localStorage.setItem('savedTodoList', JSON.stringify(todoList));}
     }, [todoList]);

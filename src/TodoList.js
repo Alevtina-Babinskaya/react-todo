@@ -1,4 +1,4 @@
-import React from 'react';
+
 import TodoListItem from './TodoListItem';
 
 const TodoList = function({todoList, onRemoveTodo}) {
