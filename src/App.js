@@ -26,9 +26,11 @@ function App() {
       const todos = data.records.map((todo) => ({
         title: todo.fields.title,
         id: todo.id,
+        todoStatus: !!todo.fields.status,
       })); 
+      console.log(todos);
 
-      setTodoList(todos);
+      setTodoList(todos.sort(sortTodos));
       setIsLoading(false);
     }
   
@@ -48,6 +50,7 @@ function App() {
       body: JSON.stringify({
         fields: {
           title: todo.title,
+          status: false,
         }
       }),
     };
@@ -65,16 +68,69 @@ function App() {
       ...prevTodoList,
       {
         id: dataResponse.id,
-        title: dataResponse.fields.title,
-      },])
+        title: dataResponse.fields.title, 
+        todoStatus: dataResponse.fields.status,
+      },].sort(sortTodos))
     //return dataResponse;
   } catch (error) {
     console.log(error);
     return null;
   }
   };
-  
 
+  const sortTodos = (todoLeft, todoRight) => {
+    if (todoLeft.todoStatus === todoRight.todoStatus) {
+      return 0;
+    }
+    if (todoLeft.todoStatus === true && todoRight.todoStatus === false) {
+      return 1;
+    }
+    else {
+      return -1;
+    }
+  }
+
+  const toggleTodo = async (todo) => {
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+      body: JSON.stringify({
+        fields: {
+          title: todo.title,
+          status: !todo.todoStatus,
+        }
+      }),
+    };
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${todo.id}`;
+
+    try {     
+      const response = await fetch( url, options);
+      
+      if (!response.ok) {
+        throw new Error(`Error has occured: ${response.status}`);
+      }
+      const dataResponse = await response.json();
+      const newTodoListItem = {
+          id: dataResponse.id,
+          title: dataResponse.fields.title, 
+          todoStatus: !!dataResponse.fields.status,
+      }
+      const newTodo = todoList.map((item) => {
+        if (item.id === newTodoListItem.id) { 
+          return newTodoListItem;
+        }
+        return item;
+      });
+        
+      setTodoList(newTodo.sort(sortTodos));
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+ };
 
 
   useEffect(() => {
@@ -93,8 +149,12 @@ function App() {
     const removeTodo = (id) => {
       const newList = todoList.filter(
         (item) =>  item.id !== id );
-      setTodoList (newList);
+      setTodoList (newList.sort(sortTodos));
     }
+    // const toggleTodo = () => {
+    //   console.log(todoToggle);
+    //   const todoToggle = true;
+    // }
 
   return (
     <BrowserRouter>
@@ -105,7 +165,7 @@ function App() {
         <AddTodoForm onAddTodo = {addTodo}/>{isLoading ? (
               <p>Loading...</p>
               ) :(
-              <TodoList todoList = {todoList} onRemoveTodo = {removeTodo}/>
+              <TodoList todoList = {todoList} onRemoveTodo = {removeTodo} onToggleTodo={toggleTodo}/>
               )}
               </>
             }>
