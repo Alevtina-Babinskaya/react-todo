@@ -1,8 +1,9 @@
-import React from "react";
-const InputWithLabel = (props) => {
-    const inputRef = React.useRef();
+import {useRef, useEffect} from "react";
 
-    React.useEffect(() => {
+const InputWithLabel = (props) => {
+    const inputRef = useRef();
+
+    useEffect(() => {
         inputRef.current.focus();
     
     }, [props.isFocused]);

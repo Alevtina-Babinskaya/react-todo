@@ -1,7 +1,8 @@
-import React from "react";
 import InputWithLabel from "./InputWithLabel";
+import { useState } from "react";
+
 const AddTodoForm = function({onAddTodo}) {
-    const [todoTitle, setTodoTitle] = React.useState('');
+    const [todoTitle, setTodoTitle] = useState('');
     
     const handleTitleChange = (event) => {
         let newTodoTitle = event.target.value;
@@ -13,7 +14,6 @@ const AddTodoForm = function({onAddTodo}) {
         setTodoTitle('');
         onAddTodo ({
             title: todoTitle, 
-            id: Date.now(),
         });
 
     };
