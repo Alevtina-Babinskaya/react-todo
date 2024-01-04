@@ -1,8 +1,7 @@
 
-const TodoListItem = function ({todo, onRemoveTodo}) {
-
+const TodoListItem = function ({todo, onRemoveTodo, toggleTodo}) {
     return (
-    <li>{todo.title} &nbsp; <button type="button" onClick={() => onRemoveTodo(todo.id)}>Remove</button></li>
+    <li><input type="checkbox" checked={todo.todoStatus || false} onChange={() => toggleTodo(todo)}></input> {todo.title} <button type="button" onClick={() => onRemoveTodo(todo.id)}>Remove</button></li>
     );
     };
 export default TodoListItem;
