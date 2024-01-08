@@ -79,15 +79,8 @@ function App() {
   };
 
   const sortTodos = (todoLeft, todoRight) => {
-    if (todoLeft.todoStatus === todoRight.todoStatus) {
-      return 0;
-    }
-    if (todoLeft.todoStatus === true && todoRight.todoStatus === false) {
-      return 1;
-    }
-    else {
-      return -1;
-    }
+    return todoLeft.todoStatus === todoRight.todoStatus ? 0 : todoLeft.todoStatus ? 1 : -1;
+ 
   }
 
   const toggleTodo = async (todo) => {
@@ -142,19 +135,34 @@ function App() {
     localStorage.setItem('savedTodoList', JSON.stringify(todoList));}
     }, [todoList]);
 
-  // const addTodo = (newTodo) => {
-  //   setTodoList ([...todoList, newTodo]);
-  // };
-
+    const deleteTodo = async(id) => {
+      const options = {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+        }
+      }
+      const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${id}`;
+      try {     
+        const response = await fetch( url, options);
+        
+        if (!response.ok) {
+          throw new Error(`Error has occured: ${response.status}`);
+        }
+        const dataResponse = await response.json();
+        return dataResponse;
+      } catch (error) {
+        console.log(error);
+      }
+    }
     const removeTodo = (id) => {
+      deleteTodo(id);
       const newList = todoList.filter(
         (item) =>  item.id !== id );
       setTodoList (newList.sort(sortTodos));
     }
-    // const toggleTodo = () => {
-    //   console.log(todoToggle);
-    //   const todoToggle = true;
-    // }
+
 
   return (
     <BrowserRouter>
