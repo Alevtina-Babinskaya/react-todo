@@ -2,6 +2,7 @@ import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import styled from 'styled-components';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -163,13 +164,15 @@ function App() {
       setTodoList (newList.sort(sortTodos));
     }
 
+    const Heading = styled.h1`
+    color: #467285;`
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={
         <>
-        <h1>Todo List</h1>
+        <Heading>Todo List</Heading>
         <AddTodoForm onAddTodo = {addTodo}/>{isLoading ? (
               <p>Loading...</p>
               ) :(

@@ -9,8 +9,8 @@ const InputWithLabel = (props) => {
     }, [props.isFocused]);
 return (
 <>
-    <label htmlFor="todoTitle">{props.children}</label>&nbsp;
-    <input value={props.value} name="title" id="todoTitle" onChange={props.onInputChange} ref={inputRef}></input>&nbsp;
+    <label htmlFor="todoTitle">{props.children}</label>
+    <input value={props.value} name="title" id="todoTitle" onChange={props.onInputChange} ref={inputRef}></input>
 </>
 );
 };

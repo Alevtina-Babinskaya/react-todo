@@ -1,0 +1,33 @@
+.ListItem_completed {
+ color: #999999;
+ list-style-type: none;
+}
+
+.ListItem {
+    color: #333333;
+    list-style-type: none;
+   }
+
+.checkbox {
+    margin: 0 10px 0 0;
+}
+
+.removeButton {
+    background-image: url('delete-icon.svg');
+    opacity: 0.5;
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+    border-width: 0; 
+    white-space: nowrap;
+    display: table-cell;
+}
+
+.addButton {
+    background-color: rgb(21, 179, 69);
+    color: #FFF;
+    border: 1px solid #06751e;
+    font-weight: bold;
+    padding: 5px 30px;
+    border-radius: 5px;
+}
