@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import TodoListItem from './TodoListItem';
+import PropTypes from "prop-types";
 
 const TodoList = function({
     todoList, 
@@ -13,15 +14,12 @@ const TodoList = function({
     const [draggedTodoId, setDraggedTodoId] = useState(null);
     const handleDragStart = (e, id) => {
         setDraggedTodoId(id);
-        console.log(draggedTodoId);
     };
 
     const handleDrop = (e, targetId) => {
-        console.log(targetId);
         e.preventDefault();
 
         if (draggedTodoId !== targetId) {
-            console.log(todoList);
             const updatedTodoList = [...todoList];
             const draggedIndex = updatedTodoList.findIndex(
                 (todo) => todo.id === draggedTodoId
@@ -60,5 +58,11 @@ return (
          </ul>
 );
 };
-
+TodoList.propTypes = {
+    todoList: PropTypes.array, 
+    onRemoveTodo: PropTypes.func, 
+    onToggleTodo: PropTypes.func, 
+    onReorderTodo: PropTypes.func,
+    onUpdateNewTitle: PropTypes.func
+};
 export default TodoList;

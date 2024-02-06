@@ -2,7 +2,8 @@
 import styled from "styled-components"; 
 import styles from './TodoListItem.module.css';
 import { useState } from "react";
-import TodoList from "./TodoList";
+import PropTypes from "prop-types";
+
 const TodoListItem = function ({
     todo, 
     onRemoveTodo, 
@@ -56,5 +57,13 @@ const TodoListItem = function ({
             <button className={styles.removeButton} type="button" onClick={() => onRemoveTodo(todo.id)}></button>
         </li>
     );
+    };
+    TodoListItem.propTypes = {
+        todo: PropTypes.object, 
+        onRemoveTodo: PropTypes.func, 
+        toggleTodo: PropTypes.func, 
+        onUpdateNewTitle: PropTypes.func,
+        handleDragStart: PropTypes.func,
+        handleDrop: PropTypes.func,
     };
 export default TodoListItem;
