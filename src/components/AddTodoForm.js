@@ -29,7 +29,7 @@ const AddTodoForm = function({onAddTodo}) {
     );
 
 };
-AddTodoForm.PropTypes = {
+AddTodoForm.propTypes = {
     onAddTodo: PropTypes.func,
 };
 export default AddTodoForm;
