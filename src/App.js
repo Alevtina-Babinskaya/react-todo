@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
-const baseUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
+const baseUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}?view=Grid%20view&sort[0][field]=title&sort[0][direction]=asc`;
 //const sortByLastModifiedTime = "?sort[0][field]=completed&sort[0][direction]=asc&sort[1][field]=lastModifiedTime&sort[1][direction]=asc";
 
 function App() {
@@ -44,7 +44,7 @@ function App() {
         id: todo.id,
         todoStatus: todo.fields.status || false,
       })); 
-      setTodoList(todos.sort(sortTodos));
+      setTodoList(todos.sort(sortByTitle).sort(sortTodos));
     } catch (error) {
       console.log(error);
     }
@@ -96,7 +96,7 @@ function App() {
         method: "POST",
         url,
         headers: {"Content-Type": "application/json"},
-        body: { fields: { title: todo.title }},  //why we are sending only the title here?
+        body: { fields: { title: todo.title }},  //why we are sending only the title here? Probably because we don't have any other parameters to post
       });
       await getTodos();
     } catch (error) {
@@ -104,25 +104,25 @@ function App() {
     }
   };
 
-  const updateTodo = async (todo) => {
-    try {
-      const url = `${baseUrl}/${todo.id}`;
-      const data = await fetchApi({
-        method: "PATCH",
-        url,
-        headers: {"Content-Type": "application/json"},
-        body: { 
-          fields: { todoStatus: todo.status, title: todo.title },
-        },
-      });
-      const results = await getTodos();
-      console.log(results);
-      console.log(data.status)
-      // await getTodos();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const updateTodo = async (todo) => {
+  //   try {
+  //     const url = `${baseUrl}/${todo.id}`;
+  //     const data = await fetchApi({
+  //       method: "PATCH",
+  //       url,
+  //       headers: {"Content-Type": "application/json"},
+  //       body: { 
+  //         fields: { todoStatus: todo.status, title: todo.title },
+  //       },
+  //     });
+  //     const results = await getTodos();
+  //     console.log(results);
+  //     console.log(data.status)
+  //     // await getTodos();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   
   const deleteTodo = async(id) => {
     try {
@@ -175,7 +175,20 @@ function App() {
 
   const sortTodos = (todoLeft, todoRight) => {
     return todoLeft.todoStatus === todoRight.todoStatus ? 0 : todoLeft.todoStatus ? 1 : -1;
- 
+   }
+  const sortByTitle = (a, b) => {
+    if (a.title.toLowerCase() === b.title.toLowerCase()) {
+      console.log(a.title, b.title, "0 equal");
+      return 0;
+    }
+    else if (a.title.toLowerCase() < b.title.toLowerCase()) {
+      console.log(a.title, b.title, "1 a is first");
+      return 1;
+    }
+    else {
+      console.log(a.title, b.title, "-1 b is first");
+    return -1;
+    }
   }
 
 //   const toggleTodo = (id) => {
@@ -230,7 +243,7 @@ function App() {
         return item;
       });
         
-      setTodoList(newTodo.sort(sortTodos));
+      setTodoList(newTodo.sort(sortByTitle).sort(sortTodos));
     } catch (error) {
       console.log(error);
       return null;
@@ -266,7 +279,7 @@ function App() {
     }
     const newTodo = todoList.map((item) => 
     item.id === id ? {...item, title: newTitle} : item);
-    setTodoList(newTodo);
+    setTodoList(newTodo.sort(sortByTitle));
   } catch (error) {
     console.log(error);
     return null;
