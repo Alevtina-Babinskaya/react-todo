@@ -176,19 +176,10 @@ function App() {
   const sortTodos = (todoLeft, todoRight) => {
     return todoLeft.todoStatus === todoRight.todoStatus ? 0 : todoLeft.todoStatus ? 1 : -1;
    }
+ 
   const sortByTitle = (a, b) => {
-    if (a.title.toLowerCase() === b.title.toLowerCase()) {
-      console.log(a.title, b.title, "0 equal");
-      return 0;
-    }
-    else if (a.title.toLowerCase() < b.title.toLowerCase()) {
-      console.log(a.title, b.title, "1 a is first");
-      return 1;
-    }
-    else {
-      console.log(a.title, b.title, "-1 b is first");
-    return -1;
-    }
+    return (a.title.toLowerCase() === b.title.toLowerCase()) ? 0 : (a.title.toLowerCase() < b.title.toLowerCase()) ? 1 : -1;
+   
   }
 
 //   const toggleTodo = (id) => {
@@ -315,24 +306,27 @@ const reorderTodo = (newTodoList) => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={
-        <>
-        <Heading>Todo List</Heading>
-        <AddTodoForm onAddTodo = {addTodo}/>{isLoading ? (
-              <p>Loading...</p>
-              ) :(
-              <TodoList 
-                todoList = {todoList} 
-                onRemoveTodo = {removeTodo} 
-                onToggleTodo={toggleTodo} 
-                onUpdateTitle={updateTitle}
-                onReorderTodo={reorderTodo}
-                onUpdateNewTitle={updateTitle}/>
-              )}
-              </>
+        <div className=''>
+          <p>Welcome to Plantime - the ideal app for planning your precious time</p>
+          <a href='/dashboard'>Start</a>
+        </div>
             }>
         </Route>
-        <Route path='/new' element={
-          <h1>New Todo List</h1>
+        <Route path='/dashboard' element={
+          <>
+          <Heading>Todo List</Heading>
+          <AddTodoForm onAddTodo = {addTodo}/>{isLoading ? (
+                <p>Loading...</p>
+                ) :(
+                <TodoList 
+                  todoList = {todoList} 
+                  onRemoveTodo = {removeTodo} 
+                  onToggleTodo={toggleTodo} 
+                  onUpdateTitle={updateTitle}
+                  onReorderTodo={reorderTodo}
+                  onUpdateNewTitle={updateTitle}/>
+                )}
+                </>
         }></Route>
       </Routes>
     </BrowserRouter>
