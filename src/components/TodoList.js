@@ -43,8 +43,9 @@ const TodoList = function({
 
 return (
     <ul>
-          {todoList.map( function(todoItem) {
-          return (<TodoListItem 
+          {todoList.map( (todoItem) => {
+            return (
+           <TodoListItem 
             key={todoItem.id} 
             todo={todoItem} 
             onRemoveTodo={onRemoveTodo} 
@@ -52,9 +53,8 @@ return (
             handleDragStart={handleDragStart}
             handleDrop={handleDrop} 
             onReorderTodo={onReorderTodo}
-            onUpdateNewTitle={onUpdateNewTitle}/>);
-          })}
-           
+            onUpdateNewTitle={onUpdateNewTitle}/>
+          )})}
          </ul>
 );
 };
