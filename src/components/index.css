@@ -3,31 +3,38 @@ body {
     color: #333;
     font-family: 'Lato', sans-serif;
     padding: 10px 30px;
-    font-size: 14px;
+    font-size: 20px;
 
 }
 
-input {
+select {
     border-radius: 5px;
     border: 1px solid #AAAAAA;
     margin: 0 5px;
-    line-height: 24px;
+    line-height: 30px;
     margin: 0 10px;
+    font-size: 16px;
+
 }
 
-li, ul {
-    margin: 0;
+
+input.addTodo  {
+    border-radius: 5px;
+    border: 1px solid #AAAAAA;
+    margin: 0 5px;
+    line-height: 30px;
+    width: 300px;
+    font-size: 16px;
+    
 }
 
 ul {
     padding: 20px 0 0 0;
-    width: 600px;
+    width: 790px;
+    margin: 0;
 }
 
-li {
-    line-height: 24px;
-    display: flex;
-}
+
 
 h1 {
     font-size: 36px;
@@ -55,25 +62,97 @@ form {
     margin: auto 0;
 }
 
-ul {
-    width: 90%;
-}
-
 li span {
     margin-right: auto;
+    flex-grow: 8;
 }
 
 }
 
 .landingPage {
-    margin: auto;
-    padding: 20px;
+    margin: auto 20%;
+    padding: 20px 20px 50px 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: white;
     border-radius: 20px;
+    display: inline-block;
  }
 
  .landingPage img {
     border-radius: 20px;
  }
 
+ .landingPage h1 {
+    color: #333;
+    text-align: center;
+ 
+ }
+
+ a.startButton {
+    display: block;
+    width: 300px;
+    padding: 10px 30px;
+    border: #cccaca 1px solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+ }
+
+ .container {
+    margin: 20px auto;
+    width: 800px;
+    background-color: white;
+    border: #cccaca 1px solid;
+    border-radius: 10px;
+    padding: 20px ;
+ }
+
+ .sorting {
+    display: flex;
+ }
+
+ .addForm {
+    flex-grow: 5;
+ }
+
+ .addButton {
+    display: block;
+    width: 300px;
+    padding: 10px 30px;
+    border: #cccaca 1px solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+ }
+
+ .tabs {
+    width: 300px;
+    padding: 10px 30px;
+    border: #cccaca 1px solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+ }
+
+ input.editTodo {
+    padding: 0 5px;
+    line-height: 30px;
+    border-radius: 5px;
+    border: 1px solid #AAAAAA;
+    margin: 0 5px;
+    width: 90%;
+    font-size: 16px;
+
+}

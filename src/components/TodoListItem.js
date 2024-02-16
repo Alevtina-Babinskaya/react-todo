@@ -1,7 +1,7 @@
-
 import styles from './TodoListItem.module.css';
 import { useState } from "react";
 import PropTypes from "prop-types";
+
 
 const TodoListItem = function ({
     todo, 
@@ -44,14 +44,14 @@ const TodoListItem = function ({
     >
             <input className={styles.checkbox} type="checkbox" checked={todoStatus || false} onChange={() => toggleTodo(todo.id)}></input> 
             {edit ? (
-            <input value={newTitle} onChange={handleTitleChange}/>
-            ) : (
+            <span style={{flexGrow: "8"}}><input value={newTitle} onChange={handleTitleChange} className='editTodo'/></span>
+            ) : ( 
             <span>{title}</span>
             )}
             {edit ? (
-            <button type="button" onClick={handleSaveClick}>Save</button>
+            <button className={styles.saveButton} type="button" onClick={handleSaveClick}></button>
              ) : (
-            <button className={styles.editButton} type="button" onClick={handleEditClick}>Edit</button>
+            <button className={styles.editButton} type="button" onClick={handleEditClick}></button>
             )}
             <button className={styles.removeButton} type="button" onClick={() => onRemoveTodo(todo.id)}></button>
         </li>

@@ -5,7 +5,7 @@ import SortingControl from "./SortingControl";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const Heading = styled.h1`color: #467285;`
+const Heading = styled.h1`color: #467285; text-align: center;`
 const baseUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}`;
 
 const TodoContainer = ({tableName}) => {
@@ -152,8 +152,10 @@ const TodoContainer = ({tableName}) => {
 return (
    <>
     <Heading>{tableName.title}</Heading>
+    <div style={{display: "flex"}}>
     <AddTodoForm onAddTodo = {addTodo}/>
     <SortingControl generateSortingLink = {generateSortingLink}/>
+    </div>
     {isLoading ? (
           <p>Loading...</p>
           ) :(

@@ -7,15 +7,15 @@ const SortingControl = function ({generateSortingLink}) {
     }
     
     return (
-        <>
-        <label>Sort:</label>
+        <div className="sorting">
+        <label>Sort by:</label>
         <select onChange={selectHandler}>
             <option value="default">Default</option>
-            <option value="byLastModified">By Last Modified</option>
-            <option value="byTitle">By Title</option>
-            <option value="byDueDate">By Due Date</option>
+            <option value="byLastModified">Last Modified</option>
+            <option value="byTitle">Title</option>
+            
         </select>
-        </>  
+        </div>  
     );
 }
 export default SortingControl;
