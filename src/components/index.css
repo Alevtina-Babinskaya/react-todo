@@ -93,13 +93,20 @@ li span {
     width: 300px;
     padding: 10px 30px;
     border: #cccaca 1px solid;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19) inset;
     border-radius: 5px;
-    color: #333;
+    color: #444;
     text-decoration: none;
     font-weight: bold;
     margin: auto;
     text-align: center;
+ }
+
+ a.startButton:hover {
+    color: #333;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.30) inset;
+
+
  }
 
  .container {
@@ -119,19 +126,7 @@ li span {
     flex-grow: 5;
  }
 
- .addButton {
-    display: block;
-    width: 300px;
-    padding: 10px 30px;
-    border: #cccaca 1px solid;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 5px;
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-    margin: auto;
-    text-align: center;
- }
+
 
  .tabs {
     width: 300px;

@@ -1,11 +1,15 @@
 li {
     display: flex;
     list-style-type: none;
-    background-color: #FFF;
+/*    background-color: #FFF;*/
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 50px;
     margin-bottom: 10px;
     border-radius: 10px;
+}
+
+li:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
 }
 
 li span {
@@ -23,6 +27,11 @@ li span {
     
    }
 
+ .ListItem .dragging {
+    background-color: rgb(149, 196, 250);
+    opacity: 1;
+}
+
 .checkbox {
     margin: auto 10px ;
     width: 22px;
@@ -38,7 +47,7 @@ li span {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 24px 24px;
-    background-color: #FFF;
+    background-color: transparent;
     opacity: 0.5;
     width: 50px;
     height: 50px;
@@ -53,7 +62,7 @@ li span {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 24px 24px;
-    background-color: #FFF;
+    background-color: transparent;
     opacity: 0.5;
     width: 50px;
     height: 50px;
@@ -67,7 +76,7 @@ li span {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 24px 24px;
-    background-color: #FFF;
+    background-color: transparent;
     opacity: 0.5;
     width: 50px;
     height: 50px;
@@ -75,4 +84,10 @@ li span {
     /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 10px;  */
 }
+
+.removeButton:hover, .editButton:hover, .saveButton:hover {
+    opacity: 0.8;
+}
+
+
 

@@ -17,12 +17,12 @@ const AddTodoForm = function({onAddTodo}) {
         onAddTodo ({
             title: todoTitle, 
         });
-
+        
     };
     return (
         <form onSubmit={handleAddTodo} className="addForm"> 
             <InputWithLabel value={todoTitle} onInputChange = {handleTitleChange} isFocused>
-                Title:
+                Task:
             </InputWithLabel>
             <button className={styles.addButton} type="submit">Add</button>
         </form>

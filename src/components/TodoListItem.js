@@ -2,7 +2,6 @@ import styles from './TodoListItem.module.css';
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-
 const TodoListItem = function ({
     todo, 
     onRemoveTodo, 
@@ -34,11 +33,13 @@ const TodoListItem = function ({
         draggable="true"
         onDragStart={(e) => {
             handleDragStart(e, id);
-           // e.currentTarget.classList.add(styled.dragging);
         }}
-        // onDragEnd={(e) => {
-        //     e.currentTarget.classList.remove(styled.dragging);
-        // }}
+
+        onDragEnd={(e) => {
+            e.preventDefault();
+            e.currentTarget.classList.remove("dragging");
+        }}
+
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => handleDrop(e, id)}
     >

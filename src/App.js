@@ -1,17 +1,9 @@
-import TodoList from './components/TodoList';
-import AddTodoForm from './components/AddTodoForm';
-import { useState, useEffect } from 'react';
+import { useState, } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import styled from 'styled-components';
 import './components/landing.module.css';
 import landingPicture from "./img/tm5.jpg";
-import SortingControl from './components/SortingControl';
-import AddNewList from './components/AddNewList';
 import TodoContainer from './components/TodoContainer';
 
-const baseUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
-//const sortByDefault = "?view=Grid%20view&sort[0][field]=title&sort[0][direction]=asc";
-const Heading = styled.h1`color: #467285;`
 const tableList = [
   {
     link: "Default",
