@@ -1,0 +1,22 @@
+.addButton {
+    padding: 0px 30px;
+    height: 34px;
+    border: #cccaca 1px solid;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19) inset;
+    border-radius: 5px;
+    color: #444;
+    text-decoration: none;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+ }
+
+ .addButton:hover {
+    color: #333;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.30) inset;
+
+ }
+
+ .dragging {
+    background-color: rgb(149, 196, 250);
+}

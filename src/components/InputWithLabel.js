@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 return (
 <>
     <label htmlFor="todoTitle">{children}</label>
-    <input value={value} name="title" id="todoTitle" onChange={onInputChange} ref={inputRef}></input>
+    <input value={value} name="title" id="todoTitle" onChange={onInputChange} ref={inputRef} className="addTodo"></input>
 </>
 );
 };
