@@ -10,11 +10,9 @@ const TodoListItem = function ({
     handleDragStart,
     handleDrop
 }) {
-    const {title, id, todoStatus} = todo;
+    const {title, id, todoStatus, dueDate} = todo;
     const [edit, setEdit] = useState(false);
     const [newTitle, setNewTitle] = useState(title);
-   
-
     
     const handleEditClick =() => {
         setEdit(true);
@@ -45,10 +43,13 @@ const TodoListItem = function ({
     >
             <input className={styles.checkbox} type="checkbox" checked={todoStatus || false} onChange={() => toggleTodo(todo.id)}></input> 
             {edit ? (
-            <span style={{flexGrow: "8"}}><input value={newTitle} onChange={handleTitleChange} className='editTodo'/></span>
+            <span style={{flexGrow: "8"}}>
+                <input value={newTitle} onChange={handleTitleChange} className='editTodo'/>
+            </span>
             ) : ( 
             <span>{title}</span>
             )}
+            <p>{dueDate}</p>
             {edit ? (
             <button className={styles.saveButton} type="button" onClick={handleSaveClick}></button>
              ) : (

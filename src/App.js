@@ -4,6 +4,7 @@ import './components/landing.module.css';
 import landingPicture from "./img/tm5.jpg";
 import TodoContainer from './components/TodoContainer';
 
+
 const tableList = [
   {
     link: "Default",
@@ -18,9 +19,12 @@ const tableList = [
 function App() {
   const [tableName, setTableName] = useState(tableList[0]);
   const handleListSwitch = (item) => {
-    setTableName(item);
+    setTableName(item); 
   };
 
+  const currentDate = new Date();
+
+ 
   return (
     <BrowserRouter>
       <Routes>
@@ -32,18 +36,25 @@ function App() {
         </div>
             }>
         </Route>
+
         <Route path='/dashboard' element={
           <div className="container">
-         <div>
-          {
-            tableList.map((item) => 
-            <button className='tabs' id={item.link} onClick={() => handleListSwitch(item)}>{item.title}</button>)
-          }
-         </div>
-          <TodoContainer tableName={tableName} />
-
-                </div>
-        }></Route>
+            <div style={{display:"flex"}}>
+              <a className='tabs' href='/'>Home</a>
+              <h1>Today is {currentDate.toDateString()}</h1>
+            </div>
+            <div style={{display:"flex"}}>
+              
+              {
+                tableList.map((item) => 
+                <TodoContainer tableName={item} />)
+                //<button className='tabs' id={item.link} onClick={() => handleListSwitch(item)}>{item.title}</button>)
+              }
+            </div>
+           
+          </div>
+        }>
+        </Route>
       </Routes>
     </BrowserRouter>
   );

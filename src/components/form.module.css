@@ -7,7 +7,7 @@
     color: #444;
     text-decoration: none;
     font-weight: bold;
-    margin: auto;
+    margin-right: auto;
     text-align: center;
  }
 
@@ -19,4 +19,13 @@
 
  .dragging {
     background-color: rgb(149, 196, 250);
+}
+
+.closeButton {
+    background: transparent;
+    border: 0px solid #fff;
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    color: #a1a1a1;
 }

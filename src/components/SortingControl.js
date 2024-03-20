@@ -13,7 +13,7 @@ const SortingControl = function ({generateSortingLink}) {
             <option value="default">Default</option>
             <option value="byLastModified">Last Modified</option>
             <option value="byTitle">Title</option>
-            
+            <option value="byDueDate">Due Date</option>
         </select>
         </div>  
     );

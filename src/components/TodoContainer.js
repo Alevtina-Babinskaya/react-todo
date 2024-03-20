@@ -13,6 +13,7 @@ const TodoContainer = ({tableName}) => {
     const [isLoading, setIsLoading] = useState(true);
     const [sortByLink, setSortByLink] = useState("?view=Grid%20view");
 
+
     const fetchApi = async ({ method, url, body }) => {
         try {
           setIsLoading(true);
@@ -45,6 +46,7 @@ const TodoContainer = ({tableName}) => {
             title: todo.fields.title,
             id: todo.id,
             todoStatus: todo.fields.status || false,
+            dueDate: todo.fields.dueDate,
           })); 
           setTodoList(todos.sort(sortTodos));
         } catch (error) {
@@ -83,7 +85,7 @@ const TodoContainer = ({tableName}) => {
           await fetchApi({
             method: "POST",
             url,
-            body: { fields: { title: todo.title, dateModified: new Date() }},  //why we are sending only the title here? Probably because we don't have any other parameters to post
+            body: { fields: { title: todo.title, dateModified: new Date(), dueDate: todo.dueDate, }},  //why we are sending only the title here? Probably because we don't have any other parameters to post
           });
           await getTodos();
         } catch (error) {
@@ -117,7 +119,7 @@ const TodoContainer = ({tableName}) => {
             break;
           case "byDueDate":
           default:
-            setSortByLink("");
+            setSortByLink("?view=Grid%20view&sort[0][field]=dueDate&sort[0][direction]=asc");
         } 
     };
 
@@ -150,23 +152,25 @@ const TodoContainer = ({tableName}) => {
     }  
     
 return (
-   <>
-    <Heading>{tableName.title}</Heading>
-    <div style={{display: "flex"}}>
-    <AddTodoForm onAddTodo = {addTodo}/>
-    <SortingControl generateSortingLink = {generateSortingLink}/>
+   <div className="listColumn">
+    <div className="listContainer">
+      <Heading>{tableName.title}</Heading>
+      <div style={{display: "flex"}}>
+      <AddTodoForm onAddTodo = {addTodo}/>
+      <SortingControl generateSortingLink = {generateSortingLink}/>
+      </div>
+      {isLoading ? (
+            <p>Loading...</p>
+            ) :(
+            <TodoList 
+              todoList = {todoList} 
+              onRemoveTodo = {removeTodo} 
+              onToggleTodo={toggleTodo}
+              onReorderTodo={reorderTodo}
+              onUpdateNewTitle={updateTitle}/>
+            )}
     </div>
-    {isLoading ? (
-          <p>Loading...</p>
-          ) :(
-          <TodoList 
-            todoList = {todoList} 
-            onRemoveTodo = {removeTodo} 
-            onToggleTodo={toggleTodo}
-            onReorderTodo={reorderTodo}
-            onUpdateNewTitle={updateTitle}/>
-          )}
-    </>
+  </div>
 )
 };
 export default TodoContainer;
